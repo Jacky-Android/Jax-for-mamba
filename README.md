@@ -1,10 +1,9 @@
 # Jax-for-mamba · JAX / Flax Mamba-1 参考复现
 
-本仓库从 S4 / 线性时不变 SSM 教学继续，添加可测试、可训练、支持逐 token 推理的 Mamba-1 (Selective State Space Model) JAX/Flax 参考实现。重点是算法正确性、可读性、可复现性，不是 CUDA/Triton 的速度。
+本仓库使用 JAX / Flax 实现可测试、可训练、支持逐 token 推理的 Mamba-1 (Selective State Space Model) 参考模型。重点是算法正确性、可读性、可复现性，不是 CUDA/Triton 的速度。
 
 ## 包含内容
 
-- 原始 S4/SSM 教学 Notebook: [code.ipynb](code.ipynb)，保留原状。
 - JAX selective scan: [jax_mamba/selective_scan.py](jax_mamba/selective_scan.py)，通过 lax.scan 实现输入相关的 delta、B、C 和稳定的对角 A。
 - Flax Mamba-1: [jax_mamba/model.py](jax_mamba/model.py)，含输入投影、因果深度卷积、SiLU、选择性扫描、门控和输出投影。
 - MambaLM: 多层残差 Mixer、RMSNorm、词嵌入、语言模型预测头。
@@ -55,6 +54,6 @@ Python >=3.10。默认使用 JAX CPU。GPU/TPU 请按照 JAX 官方安装说明�
 
 ## 限制
 
-这是 Mamba-1 教学参考实现，不包括 Mamba-2、官方预训练权重格式兼容、融合 CUDA/Triton 内核、分布式训练或正式 benchmark。训练速度可能低于官方优化版本。原始 code.ipynb 是 S4/SSM 教学内容，不等于完整 S4 的 DPLR/HiPPO 复现。
+这是 Mamba-1 教学参考实现，不包括 Mamba-2、官方预训练权重格式兼容、融合 CUDA/Triton 内核、分布式训练或正式 benchmark。训练速度可能低于官方优化版本。这里实现的是 Mamba-1 参考版本，不包含完整 S4 的 DPLR/HiPPO 复现。
 
 参考资料：[Mamba paper](https://arxiv.org/abs/2312.00752)、[Official Mamba](https://github.com/state-spaces/mamba)、[selective_scan_ref](https://github.com/state-spaces/mamba/blob/main/mamba_ssm/ops/selective_scan_interface.py)。
